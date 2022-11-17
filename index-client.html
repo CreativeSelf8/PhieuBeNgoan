@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+      <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+      <meta content="width=device-width, height=device-height, initial-scale=1.0" name="viewport"/>
+      <title>Demo client-side form handler</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div id="lambda-form" class="lambda-form lambda-form-wrapper">
+         <form id="demo" method="post" class="container" action="https://x5bzp3vla9.execute-api.us-east-1.amazonaws.com/dev/form/demo" role="form" enctype="multipart/form-data">
+            <div class="lambda-form-content">
+               <div class="comp_input form-group" id="itmt"> <label for="name">Name</label> <input type="text" class="form-control" name="name" placeholder="Name"> </div>
+               <div class="comp_input form-group" id="i9sl"> <label for="email">Email</label> <input type="email" class="form-control" name="email" placeholder="Email"> </div>
+               <div class="comp_textarea form-group" id="i1pm"> <label for="message">Message</label>
+                  <textarea class="form-control" name="message" placeholder="Message"></textarea>
+               </div>
+               <div class="comp_stripe form-group row" id="itx6u">
+                <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+                <div class="col col-md-4 col-sm-6 col-xs-12" id="stripeElement" data-key="pk_test_CWdD9aYrDinoOBfGPNiMYbuZ" data-hide-postal="false">&nbsp;
+                </div>
+              </div>
+               <button class="comp_submit btn btn-primary btn-block" id="ieul">Send</button>
+            </div>
+         </form>
+         <div id="_show_message" style="display: none"></div>
+      </div>
+      <!-- Prod URL: https://unpkg.com/grapesjs-components-farmer/dist/gcfclient.min.js -->
+      <script type="text/javascript" src="dist/gcfclient.min.js"></script>
+      <script type="text/javascript">new GcfClient.default({formId: 'demo'});</script>
+   </body>
+</html>
+
