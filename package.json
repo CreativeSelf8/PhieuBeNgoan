@@ -19,7 +19,8 @@
     "build": "mix --production",
     "production": "mix --production",
     "lint": "eslint --ext .js,.jsx src/ example/",
-    "lint-fix": "eslint --fix --ext .js,.jsx src/ example/"
+    "lint-fix": "eslint --fix --ext .js,.jsx src/ example/",
+    "start": "nodemon index.js"
   },
   "browserslist": [
     "> 1%",
@@ -53,6 +54,8 @@
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
+    "ejs": "^3.1.8",
+    "nodemon": "^2.0.20",
     "path": "^0.12.7"
   }
 }
