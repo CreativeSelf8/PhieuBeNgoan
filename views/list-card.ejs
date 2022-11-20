@@ -1,0 +1,291 @@
+<style>
+  .pagination-outer {
+    text-align: center;
+  }
+  .pagination {
+    font-family: "Poppins", sans-serif;
+    display: inline-flex;
+  }
+  .pagination li {
+    margin: 0 5px;
+  }
+  .pagination li a.page-link {
+    color: #999;
+    background: #e7e7e7;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 37px;
+    height: 38px;
+    width: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    position: relative;
+    transition: all 0.3s ease 0s;
+  }
+  .pagination li.active a.page-link,
+  .pagination li a.page-link:hover,
+  .pagination li.active a.page-link:hover,
+  .pagination li a.page-link:focus {
+    color: #fff;
+    background: linear-gradient(#fc6767, #ec008c);
+    border: none;
+  }
+  .pagination li a.page-link:before {
+    content: "";
+    background: linear-gradient(to right bottom, #ec008c, #fc6767);
+    height: 10px;
+    width: 10px;
+    border-radius: 2px;
+    opacity: 0;
+    transform: translateX(-50%) rotate(45deg);
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    z-index: -1;
+    transition: all 0.3s ease 0s;
+  }
+  .pagination li.active a.page-link:before,
+  .pagination li a.page-link:hover:before,
+  .pagination li a.page-link:focus:before {
+    opacity: 1;
+    top: -4px;
+  }
+  .pagination li:first-child a.page-link,
+  .pagination li:last-child a.page-link {
+    font-size: 20px;
+    line-height: 34px;
+    width: 38px;
+    border-bottom: 3px solid;
+  }
+  .pagination li:first-child a.page-link:hover,
+  .pagination li:last-child a.page-link:hover {
+    color: #fff;
+    background: transparent;
+    border-bottom-color: #ec008c;
+  }
+  .pagination li:first-child a.page-link:focus,
+  .pagination li:last-child a.page-link:focus {
+    color: #999;
+    background: #e7e7e7;
+  }
+  .pagination li:first-child a.page-link:before,
+  .pagination li:last-child a.page-link:before {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  }
+  .pagination li:first-child a.page-link:hover:before,
+  .pagination li:last-child a.page-link:hover:before {
+    transform: translateX(-50%) translateY(-50%) rotate(45deg) scale(2);
+  }
+  .pagination li:first-child a.page-link:focus:before,
+  .pagination li:last-child a.page-link:focus:before {
+    opacity: 0;
+  }
+  @media only screen and (max-width: 480px) {
+    .pagination {
+      font-size: 0;
+      display: block;
+    }
+    .pagination li {
+      margin: 5px 0;
+      display: inline-block;
+    }
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  html {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 16px;
+    font-smooth: auto;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #444;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 75vh;
+  }
+
+  body {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../img/background.avif");
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  figure {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 290px;
+    height: 395px;
+    padding: 20px 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+  }
+
+  figure:before,
+  figure:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  figure:before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+  }
+
+  figure:after {
+    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+  }
+
+  figure:hover {
+    background-size: 175%;
+  }
+
+  figure:hover:after {
+    content: "ʕ•́ᴥ•̀ʔ";
+    background-color: rgba(215, 30, 221, 0.8);
+    color: white;
+    font-size: 72px;
+    z-index: 2;
+  }
+
+  figure:hover figcaption {
+    transform: translateY(-110%);
+  }
+
+  figure figcaption {
+    color: white;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+  }
+
+  figure figcaption h4 {
+    margin: 0 0 5px;
+    font-family: "Source Code Pro", sans-serif;
+    font-size: 24px;
+    line-height: 1.35;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+  }
+
+  figure figcaption h4 > span {
+    background-color: rgba(241, 196, 15, 0.8);
+  }
+
+  figure figcaption p {
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<div class="container">
+  <% if (list) { %> <% for (var i=0; i < list.length; i++) { %>
+  <a href="#">
+    <figure style="background-image: url(<%= list[i].image_url %>)">
+      <figcaption>
+        <h4><span> <%= list[i].name %> </span></h4>
+      </figcaption>
+    </figure>
+  </a>
+  <% } %>
+</div>
+
+<!-- <div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <% if (hasPreviousPage) { %>
+      <li class="page-item">
+        <a class="page-link" href="?page=1">First</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= previousPage %>">
+          <%= previousPage %>
+        </a>
+      </li>
+      <% } %>
+      <li class="page-item active">
+        <a class="page-link" href="?page=<%= currentPage %>">
+          <%= currentPage %>
+        </a>
+      </li>
+      <% if (hasNextPage) { %>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= nextPage %>"> <%= nextPage %> </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= lastPage %>">Last</a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+<% } %> -->
+
+<div class="demo">
+  <nav class="pagination-outer" aria-label="Page navigation">
+    <ul class="pagination">
+      <% if (hasPreviousPage) { %>
+      <li class="page-item">
+        <a class="page-link" href="?page=1">«</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= previousPage %>">
+          <%= previousPage %>
+        </a>
+      </li>
+      <% } %>
+      <li class="page-item active">
+        <a class="page-link" href="?page=<%= currentPage %>">
+          <%= currentPage %>
+        </a>
+      </li>
+      <% if (hasNextPage) { %>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= nextPage %>"> <%= nextPage %> </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page=<%= lastPage %>">»</a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  let dataArr = "<%= list %>";
+</script>

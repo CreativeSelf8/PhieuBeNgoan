@@ -27,6 +27,18 @@ export function createRandomDog(): Card {
     chosen = Tier[Tier.Legendary];
   }
   count++;
+  ()=>{
+    fetch('https://dog.ceo/api/breeds/image/random')
+      .then(result =>{
+      return result.json();
+    })
+    .then(picture=>{
+      resolve(picture.message);
+    });
+  const response = await fetch('https://dog.ceo/api/breeds/image/random');
+  const data = await response.json();
+  let url = await data.message
+
   return {
     name: faker.animal.dog(),
     image_url: faker.image.imageUrl(600, 400, "dog"),
