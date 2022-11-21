@@ -75,7 +75,7 @@ app.get("/list", (req, res) => {
     end = ITEMS_PER_PAGE * page - 1;
   }
   res.render("list-card", {
-    list: claimCards.slice(start, end+1),
+    list: claimCards.slice(start, end + 1),
     currentPage: page,
     hasNextPage: ITEMS_PER_PAGE * page < totalItems,
     hasPreviousPage: page > 1,
