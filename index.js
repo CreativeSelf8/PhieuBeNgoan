@@ -41,6 +41,10 @@ app.use(express.static(path.join(__dirname, "views")));
 app.set("view engine", "ejs");
 
 app.get("/claim", (req, res) => {
+  res.render("claim-card",);
+});
+
+app.get("/claim-card", (req, res) => {
   let randomCard = getRandomCard();
   addToClaimList(randomCard);
   let color = "rgba(30, 255, 49, 0.8)";
@@ -58,10 +62,7 @@ app.get("/claim", (req, res) => {
       color = "rgba(226, 11, 11, 0.8)";
       break;
   }
-  res.render("claim-card", {
-    card: randomCard,
-    tier_color: color,
-  });
+  res.status(200).json({ card: randomCard, tier_color: color });
 });
 
 const ITEMS_PER_PAGE = 4;
@@ -89,12 +90,8 @@ app.get("/get", (req, res) => {
   res.render("get-card");
 });
 
-app.get("/img/background.avif", function (req, res) {
-  res.sendFile(path.join(__dirname, "img/background.avif"));
-});
-
-app.get("/js/pagination.js", function (req, res) {
-  res.sendFile(path.join(__dirname, "js/pagination.js"));
+app.get("/img/:name", function (req, res) {
+  res.sendFile(path.join(__dirname, "img", req.params.name));
 });
 
 app.listen(port, () => {
