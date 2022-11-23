@@ -86,10 +86,6 @@ app.get("/list", (req, res) => {
   });
 });
 
-app.get("/get", (req, res) => {
-  res.render("get-card");
-});
-
 app.get("/img/:name", function (req, res) {
   res.sendFile(path.join(__dirname, "img", req.params.name));
 });
