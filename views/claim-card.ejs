@@ -309,9 +309,10 @@
 
 <script>
   $("#card-claim").click(() => {
+    $("#card_title").hide();
     $("#card").css(
       "background-image",
-      "url(https://i.upanh.org/2022/11/22/opening.gif)"
+      "url(../img/opening.gif)"
       // "url(https://i.giphy.com/media/xT9DPldJHzZKtOnEn6/giphy.webp)"
     );
     setTimeout(function () {
@@ -323,6 +324,7 @@
           $("#card_overall").css("background-color", res.tier_color);
           $("#card").css("background-image", "url(" + res.card.image_url + ")");
           $("#card_title").text(res.card.name);
+          $("#card_title").show();
         },
       });
     }, 4500);
