@@ -308,7 +308,6 @@
 </div>
 
 <script>
-  const BASE_URL = window.location.host;
   $("#card-claim").click(() => {
     $("#card").css(
       "background-image",
@@ -317,7 +316,7 @@
     );
     setTimeout(function () {
       $.ajax({
-        url: BASE_URL + "/claim-card",
+        url: "/claim-card",
         type: "GET",
         dataType: "json", // added data type
         success: function (res) {
