@@ -3,6 +3,7 @@ const path = require("path");
 let app = express();
 const port = 3000;
 const fs = require("fs");
+var favicon = require('serve-favicon')
 
 function readData(path) {
   let rawdata = fs.readFileSync(path);
@@ -39,8 +40,9 @@ function addToClaimList(object) {
 
 app.use(express.static(path.join(__dirname, "views")));
 app.set("view engine", "ejs");
+app.use(favicon(path.join(__dirname, 'img', 'firework.ico')))
 
-app.get("/claim", (req, res) => {
+app.get("/", (req, res) => {
   res.render("claim-card",);
 });
 
