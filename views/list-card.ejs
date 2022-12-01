@@ -386,6 +386,7 @@
     opacity: 0.65;
     transform: translateY(-2px);
     color: rgb(251, 255, 0);
+    text-align: center;
   }
   .leaderboard header .leaderboard__icon {
     fill: #fff;
@@ -584,7 +585,6 @@
   <div class="button" id="claim-btn"></div>
   <div class="button" id="list-btn"></div>
 </div>
-<% } %>
 
 <div class="demo">
   <nav class="pagination-outer" aria-label="Page navigation">
@@ -615,8 +615,13 @@
     </ul>
   </nav>
 </div>
+<% } %>
 
 <script>
+  let dataLength = <%= list.length %>;
+  if (dataLength == 0) {
+    $(".demo").hide();
+  }
   $("#claim-btn").click(() => {
     window.location.href = "/";
   });

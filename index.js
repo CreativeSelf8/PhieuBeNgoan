@@ -73,7 +73,7 @@ app.get("/claim-card", (req, res) => {
   res.status(200).json({ card: randomCard, tier_color: color });
 });
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 3;
 app.get("/list", (req, res) => {
   let claimCards = readData("./claim-list.json").map((e) => new Card(e));
   let totalItems = claimCards.length;
