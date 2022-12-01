@@ -3,7 +3,7 @@ const path = require("path");
 let app = express();
 const port = 3000;
 const fs = require("fs");
-var favicon = require('serve-favicon')
+var favicon = require("serve-favicon");
 
 function readData(path) {
   let rawdata = fs.readFileSync(path);
@@ -40,14 +40,20 @@ function addToClaimList(object) {
 
 app.use(express.static(path.join(__dirname, "views")));
 app.set("view engine", "ejs");
-app.use(favicon(path.join(__dirname, 'img', 'firework.ico')))
+app.use(favicon(path.join(__dirname, "img", "firework.ico")));
 
 app.get("/", (req, res) => {
-  res.render("claim-card",);
+  res.render("claim-card");
 });
 
 app.get("/claim-card", (req, res) => {
+  const date = new Date();
+  const day = date.getDate();
+  const dateStrArr = date.toDateString().split(" ");
+  const month = dateStrArr[1];
   let randomCard = getRandomCard();
+  randomCard.day = day;
+  randomCard.month = month.toUpperCase();
   addToClaimList(randomCard);
   let color = "rgba(30, 255, 49, 0.8)";
   switch (color) {
@@ -71,6 +77,31 @@ const ITEMS_PER_PAGE = 4;
 app.get("/list", (req, res) => {
   let claimCards = readData("./claim-list.json").map((e) => new Card(e));
   let totalItems = claimCards.length;
+
+  for (let card of claimCards) {
+    let color = "rgba(30, 255, 49, 0.8)";
+    switch (card.tier) {
+      case "UNCOMMON":
+        color = "rgba(30, 229, 255, 0.8)";
+        break;
+      case "RARE":
+        color = "rgba(10, 15, 73, 0.8)";
+        break;
+      case "EPIC":
+        color = "rgba(128, 5, 177, 0.8)";
+        break;
+      case "LEGENDARY":
+        color = "rgba(226, 11, 11, 0.8)";
+        break;
+    }
+    claimCards.tier_color = color;
+  }
+
+  let legendaryCount = claimCards.filter((e) => e.tier.toUpperCase() === 'LEGENDARY').length
+  let epicCount = claimCards.filter((e) => e.tier.toUpperCase() === 'EPIC').length
+  let rareCount = claimCards.filter((e) => e.tier.toUpperCase() === 'RARE').length
+  let uncommonCount = claimCards.filter((e) => e.tier.toUpperCase() === 'UNCOMMON').length
+  let commonCount = claimCards.filter((e) => e.tier.toUpperCase() === 'COMMON').length;
   let page = parseInt(req.query.page) || 1;
   let start = ITEMS_PER_PAGE * (page - 1);
   let end = totalItems;
@@ -85,6 +116,12 @@ app.get("/list", (req, res) => {
     nextPage: page + 1,
     previousPage: page - 1,
     lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
+    total: totalItems,
+    legendaryCount: legendaryCount,
+    epicCount: epicCount,
+    rareCount: rareCount,
+    uncommonCount: uncommonCount,
+    commonCount: commonCount
   });
 });
 
