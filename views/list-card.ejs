@@ -510,7 +510,7 @@
   <main class="leaderboard__profiles">
     <article class="leaderboard__profile">
       <img
-        src="https://randomuser.me/api/portraits/men/32.jpg"
+        src="../img/legendary.png"
         class="leaderboard__picture"
       />
       <span class="leaderboard__name" style="color: rgba(226, 11, 11, 0.8)"
@@ -521,7 +521,7 @@
 
     <article class="leaderboard__profile">
       <img
-        src="https://randomuser.me/api/portraits/men/97.jpg"
+        src="../img/epic.png"
         class="leaderboard__picture"
       />
       <span class="leaderboard__name" style="color: rgba(128, 5, 177, 0.8)"
@@ -532,7 +532,7 @@
 
     <article class="leaderboard__profile">
       <img
-        src="https://randomuser.me/api/portraits/women/17.jpg"
+        src="../img/rare.png"
         class="leaderboard__picture"
       />
       <span class="leaderboard__name" style="color: rgba(10, 15, 73, 0.8)"
@@ -543,7 +543,7 @@
 
     <article class="leaderboard__profile">
       <img
-        src="https://randomuser.me/api/portraits/men/37.jpg"
+        src="../img/uncommon.png"
         class="leaderboard__picture"
       />
       <span class="leaderboard__name" style="color: rgba(30, 229, 255, 0.8)"
@@ -553,7 +553,7 @@
     </article>
     <article class="leaderboard__profile">
       <img
-        src="https://randomuser.me/api/portraits/men/37.jpg"
+        src="../img/common.png"
         class="leaderboard__picture"
       />
       <span class="leaderboard__name" style="color: rgba(30, 255, 49, 0.8)"
@@ -618,7 +618,6 @@
 <% } %>
 
 <script>
-  $(".leaderboard__picture").hide();
   let dataLength = <%= list.length %>;
   if (dataLength == 0) {
     $(".demo").hide();
