@@ -43,7 +43,7 @@ app.set("view engine", "ejs");
 app.use(favicon(path.join(__dirname, "img", "firework.ico")));
 
 app.get("/", (req, res) => {
-  res.render("claim-card");
+  res.render("claim-card", { title: "Get cards" });
 });
 
 app.get("/claim-card", (req, res) => {
@@ -121,7 +121,8 @@ app.get("/list", (req, res) => {
     epicCount: epicCount,
     rareCount: rareCount,
     uncommonCount: uncommonCount,
-    commonCount: commonCount
+    commonCount: commonCount,
+    title: "Claimed cards" 
   });
 });
 
