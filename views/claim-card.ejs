@@ -1,382 +1,388 @@
-<style>
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-    outline: none;
-  }
-
-  :root {
-    --size: 100px;
-    --frames: 62;
-  }
-
-  html {
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 16px;
-    font-smooth: auto;
-    font-weight: 300;
-    line-height: 1.5;
-    color: #444;
-  }
-
-  body {
-    overflow-y: hidden; /* Hide vertical scrollbar */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-image: url("../img/background.png");
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  figure {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    width: 290px;
-    height: 395px;
-    padding: 20px 20px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    overflow: hidden;
-  }
-
-  figure:before,
-  figure:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  figure:before {
-    content: "";
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 0;
-  }
-
-  figure:after {
-    content: "";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    overflow: hidden;
-  }
-
-  figure:hover {
-    background-size: 175%;
-  }
-
-  figure:hover:after {
-    content: "ʕ•́ᴥ•̀ʔ";
-    background-color: rgba(215, 30, 221, 0.8);
-    color: white;
-    font-size: 72px;
-    z-index: 2;
-  }
-
-  figure:hover figcaption {
-    transform: translateY(-110%);
-  }
-
-  figure figcaption {
-    color: white;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1;
-  }
-
-  figure figcaption h4 {
-    margin: 0 0 5px;
-    font-family: "Source Code Pro", sans-serif;
-    font-size: 24px;
-    line-height: 1.35;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
-  }
-
-  figure figcaption h4 > span {
-    /* background-color: rgba(177, 5, 5, 0.8); */
-  }
-
-  figure figcaption p {
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .content {
-    // background-color: #15202B;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
-
-  input {
-    display: none;
-  }
-
-  .like {
-    margin-top: 100px;
-    display: block;
-    width: var(--size);
-    height: var(--size);
-    cursor: pointer;
-    border-radius: 999px;
-    overflow: visible;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
-    /* margin: 0; */
-    position: absolute;
-    top: 70%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    border: 1px solid pink;
-  }
-
-  .hearth {
-    background-image: url("../img/hearth.svg");
-    background-size: calc(var(--size) * var(--frames)) var(--size);
-    background-repeat: no-repeat;
-    background-position-x: calc(var(--size) * (var(--frames) * -1 + 2));
-    background-position-y: calc(var(--size) * 0.02);
-    width: var(--size);
-    height: var(--size);
-  }
-
-  input:checked + .hearth {
-    animation: like 1s steps(calc(var(--frames) - 3));
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes like {
-    0% {
-      background-position-x: 0;
+<head>
+  <title>Get cards</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      outline: none;
     }
-
-    100% {
-      background-position-x: calc(var(--size) * (var(--frames) * -1 + 3));
+  
+    :root {
+      --size: 100px;
+      --frames: 62;
     }
-  }
-
-  @media (hover: hover) {
-    .like:hover {
-      background-color: #e1255e 15;
+  
+    html {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 16px;
+      font-smooth: auto;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #444;
     }
-    .like:hover .hearth {
-      background-position-x: calc(var(--size) * (var(--frames) * -1 + 1));
+  
+    body {
+      overflow-y: hidden; /* Hide vertical scrollbar */
+      overflow-x: hidden; /* Hide horizontal scrollbar */
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-image: url("../img/background.png");
     }
-  }
-  /* 
-  html {
-    background: #e8e8f3;
-    height: 100vh;
-    display: grid;
-    place-content: center;
-    -webkit-tap-highlight-color: transparent;
-  } */
+  
+    a {
+      text-decoration: none;
+    }
+  
+    figure {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 290px;
+      height: 395px;
+      padding: 20px 20px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 10px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow: hidden;
+    }
+  
+    figure:before,
+    figure:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  
+    figure:before {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.1);
+      z-index: 0;
+    }
+  
+    figure:after {
+      content: "";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow: hidden;
+    }
+  
+    figure:hover {
+      background-size: 175%;
+    }
+  
+    figure:hover:after {
+      content: "ʕ•́ᴥ•̀ʔ";
+      background-color: rgba(215, 30, 221, 0.8);
+      color: white;
+      font-size: 72px;
+      z-index: 2;
+    }
+  
+    figure:hover figcaption {
+      transform: translateY(-110%);
+    }
+  
+    figure figcaption {
+      color: white;
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 1;
+    }
+  
+    figure figcaption h4 {
+      margin: 0 0 5px;
+      font-family: "Source Code Pro", sans-serif;
+      font-size: 24px;
+      line-height: 1.35;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+    }
+  
+    figure figcaption h4 > span {
+      /* background-color: rgba(177, 5, 5, 0.8); */
+    }
+  
+    figure figcaption p {
+      margin: 0;
+      line-height: 1.5;
+    }
+  
+    .content {
+      // background-color: #15202B;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+  
+    input {
+      display: none;
+    }
+  
+    .like {
+      margin-top: 100px;
+      display: block;
+      width: var(--size);
+      height: var(--size);
+      cursor: pointer;
+      border-radius: 999px;
+      overflow: visible;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: transparent;
+      /* margin: 0; */
+      position: absolute;
+      top: 70%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      border: 1px solid pink;
+    }
+  
+    .hearth {
+      background-image: url("../img/hearth.svg");
+      background-size: calc(var(--size) * var(--frames)) var(--size);
+      background-repeat: no-repeat;
+      background-position-x: calc(var(--size) * (var(--frames) * -1 + 2));
+      background-position-y: calc(var(--size) * 0.02);
+      width: var(--size);
+      height: var(--size);
+    }
+  
+    input:checked + .hearth {
+      animation: like 1s steps(calc(var(--frames) - 3));
+      animation-fill-mode: forwards;
+    }
+  
+    @keyframes like {
+      0% {
+        background-position-x: 0;
+      }
+  
+      100% {
+        background-position-x: calc(var(--size) * (var(--frames) * -1 + 3));
+      }
+    }
+  
+    @media (hover: hover) {
+      .like:hover {
+        background-color: #e1255e 15;
+      }
+      .like:hover .hearth {
+        background-position-x: calc(var(--size) * (var(--frames) * -1 + 1));
+      }
+    }
+    /* 
+    html {
+      background: #e8e8f3;
+      height: 100vh;
+      display: grid;
+      place-content: center;
+      -webkit-tap-highlight-color: transparent;
+    } */
+  
+    .menu {
+      position: absolute;
+      padding: 30px;
+      margin-right: 150px;
+      margin-top: 100px;
+      right: 0;
+      top: 0;
+      background: #e8e8f3;
+      border-radius: 100%;
+      cursor: pointer;
+      box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15),
+        -7px -7px 20px rgba(255, 255, 255, 1),
+        inset 0px 0px 4px rgba(255, 255, 255, 0.2),
+        inset 7px 7px 15px rgba(55, 84, 170, 0),
+        inset -7px -7px 20px rgba(255, 255, 255, 0),
+        0px 0px 4px rgba(255, 255, 255, 0);
+    }
+  
+    .menu::before,
+    .menu::after {
+      content: "";
+      background: #c3c2c7;
+      border-radius: 5px;
+      width: 30px;
+      height: 5px;
+      position: absolute;
+      left: 16px;
+      top: 27px;
+      transition: 0.2s ease;
+      z-index: 1;
+    }
+    .menu::before {
+      transform: rotate(0deg);
+    }
+    .menu::after {
+      transform: rotate(-90deg);
+    }
+    .menu.open {
+      opacity: 0.9;
+    }
+  
+    .menu.open .button {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  
+    .menu.open .button:first-of-type {
+      bottom: 40px;
+      right: 70px;
+      background: url("../img/1.svg") no-repeat 50%/50% #e8e8f3;
+    }
+    .menu.open .button:nth-of-type(2) {
+      bottom: 80px;
+      background: url("https://bassets.github.io/img.svg") no-repeat 50%/ 50% #e8e8f3;
+      transition-delay: 0.05s;
+    }
+    .menu.open .button:last-of-type {
+      bottom: 40px;
+      right: -70px;
+      background: url("../img/2.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
+      transition-delay: 0.1s;
+    }
+  
+    .menu.open::before {
+      transform: rotate(45deg);
+    }
+    .menu.open::after {
+      transform: rotate(-45deg);
+    }
+    .button {
+      padding: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      background: #e8e8f3;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: inherit;
+      transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), 0.2s ease opacity,
+        0.2s cubic-bezier(0.08, 0.82, 0.17, 1) transform;
+    }
+  
+    button:hover {
+      transform: scale(1.1);
+    }
+  
+    figure .date span:last-child {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  
+    figure .date span {
+      color: white;
+      line-height: 1;
+    }
+    figure .date span:first-child {
+      font-family: "Source Code Pro", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  
+    figure .date {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px;
+      background-color: rgba(252, 104, 185, 0.8);
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+  
+    figure:hover .date {
+      bottom: -59px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
 
-  .menu {
-    position: absolute;
-    padding: 30px;
-    margin-right: 150px;
-    margin-top: 100px;
-    right: 0;
-    top: 0;
-    background: #e8e8f3;
-    border-radius: 100%;
-    cursor: pointer;
-    box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15),
-      -7px -7px 20px rgba(255, 255, 255, 1),
-      inset 0px 0px 4px rgba(255, 255, 255, 0.2),
-      inset 7px 7px 15px rgba(55, 84, 170, 0),
-      inset -7px -7px 20px rgba(255, 255, 255, 0),
-      0px 0px 4px rgba(255, 255, 255, 0);
-  }
-
-  .menu::before,
-  .menu::after {
-    content: "";
-    background: #c3c2c7;
-    border-radius: 5px;
-    width: 30px;
-    height: 5px;
-    position: absolute;
-    left: 16px;
-    top: 27px;
-    transition: 0.2s ease;
-    z-index: 1;
-  }
-  .menu::before {
-    transform: rotate(0deg);
-  }
-  .menu::after {
-    transform: rotate(-90deg);
-  }
-  .menu.open {
-    opacity: 0.9;
-  }
-
-  .menu.open .button {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .menu.open .button:first-of-type {
-    bottom: 40px;
-    right: 70px;
-    background: url("../img/1.svg") no-repeat 50%/50% #e8e8f3;
-  }
-  .menu.open .button:nth-of-type(2) {
-    bottom: 80px;
-    background: url("https://bassets.github.io/img.svg") no-repeat 50%/ 50% #e8e8f3;
-    transition-delay: 0.05s;
-  }
-  .menu.open .button:last-of-type {
-    bottom: 40px;
-    right: -70px;
-    background: url("../img/2.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
-    transition-delay: 0.1s;
-  }
-
-  .menu.open::before {
-    transform: rotate(45deg);
-  }
-  .menu.open::after {
-    transform: rotate(-45deg);
-  }
-  .button {
-    padding: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    background: #e8e8f3;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    opacity: 0;
-    pointer-events: none;
-    box-shadow: inherit;
-    transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), 0.2s ease opacity,
-      0.2s cubic-bezier(0.08, 0.82, 0.17, 1) transform;
-  }
-
-  button:hover {
-    transform: scale(1.1);
-  }
-
-  figure .date span:last-child {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  figure .date span {
-    color: white;
-    line-height: 1;
-  }
-  figure .date span:first-child {
-    font-family: "Source Code Pro", sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  figure .date {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    background-color: rgba(252, 104, 185, 0.8);
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-
-  figure:hover .date {
-    bottom: -59px;
-  }
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<div class="content" id="card-claim">
-  <a>
-    <figure
-      id="card"
-      style="
-        /* background-image: url('../img/secret.jpeg'); */
-        background-image: url('../img/claim.gif');
-      "
-    >
-      <div class="date">
-        <span class="card-date-day"></span>
-        <span class="card-date-month"></span>
-      </div>
-      <figcaption>
-        <h4 id="card_overall">
-          <span id="card_title"></span>
-        </h4>
-      </figcaption>
-    </figure>
-  </a>
-  <!-- <label class="like">
-    <input type="checkbox" />
-    <div class="hearth"></div>
-  </label> -->
-</div>
-<div class="menu" onclick="this.classList.toggle('open')">
-  <div class="button" id="claim-btn"></div>
-  <div class="button" id="list-btn"></div>
-</div>
-
-<script>
-  $("#card_title").hide();
-  $(".date").hide();
-
-  $("#card-claim").click(() => {
+<body>
+  <div class="content" id="card-claim">
+    <a>
+      <figure
+        id="card"
+        style="
+          /* background-image: url('../img/secret.jpeg'); */
+          background-image: url('../img/claim.gif');
+        "
+      >
+        <div class="date">
+          <span class="card-date-day"></span>
+          <span class="card-date-month"></span>
+        </div>
+        <figcaption>
+          <h4 id="card_overall">
+            <span id="card_title"></span>
+          </h4>
+        </figcaption>
+      </figure>
+    </a>
+    <!-- <label class="like">
+      <input type="checkbox" />
+      <div class="hearth"></div>
+    </label> -->
+  </div>
+  <div class="menu" onclick="this.classList.toggle('open')">
+    <div class="button" id="claim-btn"></div>
+    <div class="button" id="list-btn"></div>
+  </div>
+  
+  <script>
     $("#card_title").hide();
     $(".date").hide();
-    $("#card").css(
-      "background-image",
-      "url(../img/opening.gif)"
-      // "url(https://i.giphy.com/media/xT9DPldJHzZKtOnEn6/giphy.webp)"
-    );
-    setTimeout(function () {
-      $.ajax({
-        url: "/claim-card",
-        type: "GET",
-        dataType: "json", // added data type
-        success: function (res) {
-          $("#card_overall").css("background-color", res.tier_color);
-          $("#card").css("background-image", "url(" + res.card.image_url + ")");
-          $("#card_title").text(res.card.name);
-          $(".card-date-day").text(res.card.day);
-          $(".card-date-month").text(res.card.month);
-          $("#card_title").show();
-          $(".date").show();
-        },
-      });
-    }, 8500);
-  });
-
-  $("#claim-btn").click(() => {
-    window.location.href = "/";
-  });
-  $("#list-btn").click(() => {
-    window.location.href = "/list";
-  });
-</script>
+  
+    $("#card-claim").click(() => {
+      $("#card_title").hide();
+      $(".date").hide();
+      $("#card").css(
+        "background-image",
+        "url(../img/opening.gif)"
+        // "url(https://i.giphy.com/media/xT9DPldJHzZKtOnEn6/giphy.webp)"
+      );
+      setTimeout(function () {
+        $.ajax({
+          url: "/claim-card",
+          type: "GET",
+          dataType: "json", // added data type
+          success: function (res) {
+            $("#card_overall").css("background-color", res.tier_color);
+            $("#card").css("background-image", "url(" + res.card.image_url + ")");
+            $("#card_title").text(res.card.name);
+            $(".card-date-day").text(res.card.day);
+            $(".card-date-month").text(res.card.month);
+            $("#card_title").show();
+            $(".date").show();
+          },
+        });
+      }, 4500);
+    });
+  
+    $("#claim-btn").click(() => {
+      window.location.href = "/";
+    });
+    $("#list-btn").click(() => {
+      window.location.href = "/list";
+    });
+  </script>
+</body>
