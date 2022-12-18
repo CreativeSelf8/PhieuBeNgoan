@@ -56,7 +56,7 @@ app.get("/claim-card", (req, res) => {
   randomCard.month = month.toUpperCase();
   addToClaimList(randomCard);
   let color = "rgba(30, 255, 49, 0.8)";
-  switch (color) {
+  switch (randomCard.tier.toUpperCase()) {
     case "UNCOMMON":
       color = "rgba(30, 229, 255, 0.8)";
       break;
@@ -73,14 +73,14 @@ app.get("/claim-card", (req, res) => {
   res.status(200).json({ card: randomCard, tier_color: color });
 });
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 4;
 app.get("/list", (req, res) => {
   let claimCards = readData("./claim-list.json").map((e) => new Card(e));
   let totalItems = claimCards.length;
 
   for (let card of claimCards) {
     let color = "rgba(30, 255, 49, 0.8)";
-    switch (card.tier) {
+    switch (card.tier.toUpperCase()) {
       case "UNCOMMON":
         color = "rgba(30, 229, 255, 0.8)";
         break;
@@ -94,7 +94,7 @@ app.get("/list", (req, res) => {
         color = "rgba(226, 11, 11, 0.8)";
         break;
     }
-    claimCards.tier_color = color;
+    card.tier_color = color;
   }
 
   let legendaryCount = claimCards.filter((e) => e.tier.toUpperCase() === 'LEGENDARY').length

@@ -7,12 +7,12 @@
       box-sizing: border-box;
       outline: none;
     }
-  
+
     :root {
       --size: 100px;
       --frames: 62;
     }
-  
+
     html {
       font-family: "Source Sans Pro", sans-serif;
       font-size: 16px;
@@ -21,7 +21,7 @@
       line-height: 1.5;
       color: #444;
     }
-  
+
     body {
       overflow-y: hidden; /* Hide vertical scrollbar */
       overflow-x: hidden; /* Hide horizontal scrollbar */
@@ -34,11 +34,11 @@
       background-size: cover;
       background-image: url("../img/background.png");
     }
-  
+
     a {
       text-decoration: none;
     }
-  
+
     figure {
       position: relative;
       display: flex;
@@ -51,11 +51,12 @@
       background-repeat: no-repeat;
       background-size: cover;
       border-radius: 10px;
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
       transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       overflow: hidden;
     }
-  
+
     figure:before,
     figure:after {
       position: absolute;
@@ -64,13 +65,13 @@
       width: 100%;
       height: 100%;
     }
-  
+
     figure:before {
       content: "";
       background-color: rgba(0, 0, 0, 0.1);
       z-index: 0;
     }
-  
+
     figure:after {
       content: "";
       display: flex;
@@ -79,11 +80,11 @@
       transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       overflow: hidden;
     }
-  
+
     figure:hover {
       background-size: 175%;
     }
-  
+
     figure:hover:after {
       content: "ʕ•́ᴥ•̀ʔ";
       background-color: rgba(215, 30, 221, 0.8);
@@ -91,17 +92,17 @@
       font-size: 72px;
       z-index: 2;
     }
-  
+
     figure:hover figcaption {
       transform: translateY(-110%);
     }
-  
+
     figure figcaption {
       color: white;
       transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
       z-index: 1;
     }
-  
+
     figure figcaption h4 {
       margin: 0 0 5px;
       font-family: "Source Code Pro", sans-serif;
@@ -109,16 +110,16 @@
       line-height: 1.35;
       text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
     }
-  
+
     figure figcaption h4 > span {
       /* background-color: rgba(177, 5, 5, 0.8); */
     }
-  
+
     figure figcaption p {
       margin: 0;
       line-height: 1.5;
     }
-  
+
     .content {
       // background-color: #15202B;
       min-height: 100vh;
@@ -127,11 +128,11 @@
       align-items: center;
       user-select: none;
     }
-  
+
     input {
       display: none;
     }
-  
+
     .like {
       margin-top: 100px;
       display: block;
@@ -149,7 +150,7 @@
       transform: translateY(-50%);
       border: 1px solid pink;
     }
-  
+
     .hearth {
       background-image: url("../img/hearth.svg");
       background-size: calc(var(--size) * var(--frames)) var(--size);
@@ -159,22 +160,22 @@
       width: var(--size);
       height: var(--size);
     }
-  
+
     input:checked + .hearth {
       animation: like 1s steps(calc(var(--frames) - 3));
       animation-fill-mode: forwards;
     }
-  
+
     @keyframes like {
       0% {
         background-position-x: 0;
       }
-  
+
       100% {
         background-position-x: calc(var(--size) * (var(--frames) * -1 + 3));
       }
     }
-  
+
     @media (hover: hover) {
       .like:hover {
         background-color: #e1255e 15;
@@ -191,7 +192,7 @@
       place-content: center;
       -webkit-tap-highlight-color: transparent;
     } */
-  
+
     .menu {
       position: absolute;
       padding: 30px;
@@ -209,7 +210,7 @@
         inset -7px -7px 20px rgba(255, 255, 255, 0),
         0px 0px 4px rgba(255, 255, 255, 0);
     }
-  
+
     .menu::before,
     .menu::after {
       content: "";
@@ -232,12 +233,12 @@
     .menu.open {
       opacity: 0.9;
     }
-  
+
     .menu.open .button {
       opacity: 1;
       pointer-events: auto;
     }
-  
+
     .menu.open .button:first-of-type {
       bottom: 40px;
       right: 70px;
@@ -254,7 +255,7 @@
       background: url("../img/2.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
       transition-delay: 0.1s;
     }
-  
+
     .menu.open::before {
       transform: rotate(45deg);
     }
@@ -275,16 +276,16 @@
       transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), 0.2s ease opacity,
         0.2s cubic-bezier(0.08, 0.82, 0.17, 1) transform;
     }
-  
+
     button:hover {
       transform: scale(1.1);
     }
-  
+
     figure .date span:last-child {
       font-size: 14px;
       font-weight: 500;
     }
-  
+
     figure .date span {
       color: white;
       line-height: 1;
@@ -294,7 +295,7 @@
       font-size: 18px;
       font-weight: 700;
     }
-  
+
     figure .date {
       display: none;
       position: absolute;
@@ -309,7 +310,7 @@
       text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
       transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-  
+
     figure:hover .date {
       bottom: -59px;
     }
@@ -347,12 +348,17 @@
     <div class="button" id="claim-btn"></div>
     <div class="button" id="list-btn"></div>
   </div>
-  
+
   <script>
+    var disabled = false;
     $("#card_title").hide();
     $(".date").hide();
-  
-    $("#card-claim").click(() => {
+
+    $("#card-claim").click((e) => {
+      if (disabled) {
+        return;
+      }
+      disabled = true;
       $("#card_title").hide();
       $(".date").hide();
       $("#card").css(
@@ -367,17 +373,21 @@
           dataType: "json", // added data type
           success: function (res) {
             $("#card_overall").css("background-color", res.tier_color);
-            $("#card").css("background-image", "url(" + res.card.image_url + ")");
+            $("#card").css(
+              "background-image",
+              "url(" + res.card.image_url + ")"
+            );
             $("#card_title").text(res.card.name);
             $(".card-date-day").text(res.card.day);
             $(".card-date-month").text(res.card.month);
             $("#card_title").show();
             $(".date").show();
+            disabled = false;
           },
         });
       }, 4500);
     });
-  
+
     $("#claim-btn").click(() => {
       window.location.href = "/";
     });
